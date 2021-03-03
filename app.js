@@ -49,11 +49,34 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "pizza",
       img: "images/pizza.png",
     },
-    {
-      name: "pizza",
-      img: "images/pizza.png",
-    },
   ];
 
   const grid = document.querySelector(".grid");
+  let cardsChosen = [];
+  let cardChosenId = [];
+
+  function createBoard() {
+    for (let i = 0; i < cardArray.length; i++) {
+      var card = document.createElement("img");
+      card.setAttribute("src", "images/blank.png");
+      card.setAttribute("data-id", i);
+      // card.addEventListener("click", flipcard);
+      grid.appendChild(card);
+    }
+  }
+
+  //check for matches
+
+  //flip your card
+  function flipCard() {
+    let cardId = this.getAttribute("data-id");
+    cardsChosen.push(cardArray[cardId].name);
+    cardsChosenId.push(cardId);
+    this.setAttribute("src", cardArray[cardId].img);
+    if (cardsChosen.length === 2) {
+      setTimeout(checkForMatch, 500);
+    }
+  }
+
+  createBoard();
 });
